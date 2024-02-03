@@ -8,4 +8,4 @@
 
 python3 plot_surface.py --x=-1:1:51 --y=-1:1:51 --model net \
 --model_file cifar10/trained_nets/model_scicore/model.pt \
---mpi --cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter
+--cuda --dir_type weights --xignore biasbn --xnorm filter --yignore biasbn --ynorm filter
