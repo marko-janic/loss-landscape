@@ -52,18 +52,18 @@ def setup_surface_file(args, surf_file, dir_file):
         f = h5py.File(surf_file, 'r')
         if (args.y and 'ycoordinates' in f.keys()) or 'xcoordinates' in f.keys():
             f.close()
-            print ("%s is already set up" % surf_file)
+            print("%s is already set up" % surf_file)
             return
 
     f = h5py.File(surf_file, 'a')
     f['dir_file'] = dir_file
 
     # Create the coordinates(resolutions) at which the function is evaluated
-    xcoordinates = np.linspace(args.xmin, args.xmax, num=args.xnum)
+    xcoordinates = np.linspace(int(args.xmin), int(args.xmax), num=int(args.xnum))
     f['xcoordinates'] = xcoordinates
 
     if args.y:
-        ycoordinates = np.linspace(args.ymin, args.ymax, num=args.ynum)
+        ycoordinates = np.linspace(int(args.ymin), int(args.ymax), num=int(args.ynum))
         f['ycoordinates'] = ycoordinates
     f.close()
 
@@ -127,7 +127,7 @@ def crunch(surf_file, net, w, s, d, dataloader, loss_key, acc_key, comm, rank, a
 
         # Send updated plot data to the master node
         syc_start = time.time()
-        losses     = mpi.reduce_max(comm, losses)
+        losses = mpi.reduce_max(comm, losses)
         accuracies = mpi.reduce_max(comm, accuracies)
         syc_time = time.time() - syc_start
         total_sync += syc_time
@@ -160,7 +160,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='plotting loss surface')
     parser.add_argument('--mpi', '-m', action='store_true', help='use mpi')
     parser.add_argument('--cuda', '-c', action='store_true', help='use cuda')
-    parser.add_argument('--threads', default=2, type=int, help='number of threads')
+    parser.add_argument('--threads', default=1, type=int, help='number of threads')
     parser.add_argument('--ngpu', type=int, default=1, help='number of GPUs to use for each rank, useful for data parallel evaluation')
     parser.add_argument('--batch_size', default=128, type=int, help='minibatch size')
 

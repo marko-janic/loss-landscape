@@ -22,10 +22,10 @@ def plot_2d_contour(surf_file, surf_name='train_loss', vmin=0.1, vmax=10, vlevel
 
     if surf_name in f.keys():
         Z = np.array(f[surf_name][:])
-    elif surf_name == 'train_err' or surf_name == 'test_err' :
+    elif surf_name == 'train_err' or surf_name == 'test_err':
         Z = 100 - np.array(f[surf_name][:])
     else:
-        print ('%s is not found in %s' % (surf_name, surf_file))
+        print('%s is not found in %s' % (surf_name, surf_file))
 
     print('------------------------------------------------------------------')
     print('plot_2d_contour')
@@ -181,7 +181,6 @@ def plot_2d_eig_ratio(surf_file, val_1='min_eig', val_2='max_eig', show=False):
     if show: plt.show()
 
 
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Plot 2D loss surface')
     parser.add_argument('--surf_file', '-f', default='', help='The h5 file that contains surface values')
@@ -196,6 +195,8 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    print(exists(args.surf_file))
+
     if exists(args.surf_file) and exists(args.proj_file) and exists(args.dir_file):
         plot_contour_trajectory(args.surf_file, args.dir_file, args.proj_file,
                                 args.surf_name, args.vmin, args.vmax, args.vlevel, args.show)
@@ -203,3 +204,5 @@ if __name__ == '__main__':
         plot_trajectory(args.proj_file, args.dir_file, args.show)
     elif exists(args.surf_file):
         plot_2d_contour(args.surf_file, args.surf_name, args.vmin, args.vmax, args.vlevel, args.show)
+    else:
+        print("None are true so nothing happens")
