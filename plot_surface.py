@@ -221,7 +221,7 @@ if __name__ == '__main__':
         if not torch.cuda.is_available():
             raise Exception('User selected cuda option, but cuda is not available on this machine')
         gpu_count = torch.cuda.device_count()
-        torch.cuda.set_device(rank % gpu_count)
+        torch.cuda.set_device((rank+1) % gpu_count)
         print('Rank %d use GPU %d of %d GPUs on %s' %
               (rank, torch.cuda.current_device(), gpu_count, socket.gethostname()))
 
