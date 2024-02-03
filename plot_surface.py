@@ -160,7 +160,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='plotting loss surface')
     parser.add_argument('--mpi', '-m', action='store_true', help='use mpi')
     parser.add_argument('--cuda', '-c', action='store_true', help='use cuda')
-    parser.add_argument('--threads', default=1, type=int, help='number of threads')
+    parser.add_argument('--threads', default=4, type=int, help='number of threads')
     parser.add_argument('--ngpu', type=int, default=1, help='number of GPUs to use for each rank, useful for data parallel evaluation')
     parser.add_argument('--batch_size', default=128, type=int, help='minibatch size')
 
@@ -221,7 +221,7 @@ if __name__ == '__main__':
         if not torch.cuda.is_available():
             raise Exception('User selected cuda option, but cuda is not available on this machine')
         gpu_count = torch.cuda.device_count()
-        torch.cuda.set_device((rank+1) % gpu_count)
+        torch.cuda.set_device(rank % gpu_count)
         print('Rank %d use GPU %d of %d GPUs on %s' %
               (rank, torch.cuda.current_device(), gpu_count, socket.gethostname()))
 
