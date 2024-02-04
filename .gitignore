@@ -12,3 +12,4 @@ cifar10/data/
 cifar10/trained_nets/model_40epochs_lr1.0_gamma0.7_batchsize64/model.pt
 cifar10/trained_nets/resnet56_sgd_lr=0.1_bs=128_wd=0.0005_save_epoch=1
 cifar10/trained_nets/net_model_epochs_adadelta
+cifar10/trained_nets/net_model_epochs_sgd/models_epochs
