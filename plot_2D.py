@@ -124,7 +124,7 @@ def plot_contour_trajectory(surf_file, dir_file, proj_file, surf_name='loss_vals
 
     # plot trajectories
     pf = h5py.File(proj_file, 'r')
-    plt.plot(pf['proj_xcoord'], pf['proj_ycoord'], marker='.')
+    plt.plot(pf['proj_xcoord'][:], pf['proj_ycoord'][:], marker='.')
 
     # plot red points when learning rate decays
     # for e in [150, 225, 275]:
